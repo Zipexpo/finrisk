@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/card";
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -63,7 +65,8 @@ export function ReportRisk({ title, subtitle, data }) {
               />
               <YAxis />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Area
+              <ChartLegend className="mt-8" content={<ChartLegendContent />} />
+              {/* <Area
                 type="monotone"
                 dataKey="a"
                 stroke="none"
@@ -71,7 +74,7 @@ export function ReportRisk({ title, subtitle, data }) {
                 connectNulls
                 dot={false}
                 activeDot={false}
-              />
+              /> */}
               <Line
                 dataKey="randW"
                 type="monotoneX"
