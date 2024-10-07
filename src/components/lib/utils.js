@@ -50,3 +50,12 @@ export function getIntersection(p1, p2, p3, p4) {
   // No intersection
   return null;
 }
+
+export function fctGeoBrownMotion(S0, mu, sigma, T, NormalZufall) {
+  return (
+    S0 *
+    Math.exp(
+      (mu - (sigma * sigma) / 2) * T + sigma * Math.sqrt(T) * NormalZufall
+    )
+  );
+}
