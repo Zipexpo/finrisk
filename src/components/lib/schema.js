@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const riskSchema = z.object({
+  u: z.coerce.number().positive().min(0).max(100),
   r_f: z.coerce.number().positive().min(0).max(100),
   t: z.coerce.number().positive(),
   mu: z.coerce.number().positive().min(0).max(100),

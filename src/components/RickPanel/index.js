@@ -42,6 +42,7 @@ export default function RickPanel() {
       const init_amount = formData.init_amount;
       const mu = formData.mu / 100;
       const sigma = formData.sigma / 100;
+      const u = formData.u / 100;
       const { start_year, t } = formData;
       const sy = 0;
       const ey = formData.end_year - formData.start_year;
@@ -49,12 +50,12 @@ export default function RickPanel() {
       const W_0 = init_amount;
       const vizdata = [
         {
-          W_F: 0,
-          E_WR: init_amount,
-          Q_WR: init_amount,
-          E: init_amount,
-          Q: init_amount,
-          a: [init_amount, init_amount],
+          W_F: W_0 * (1 - u),
+          E_WR: W_0,
+          Q_WR: W_0,
+          E: W_0,
+          Q: W_0,
+          a: [W_0, W_0],
           year: start_year,
           randW: W_0,
           pret: 0,
@@ -135,7 +136,7 @@ export default function RickPanel() {
               name="init_amount"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Invest amount</FormLabel>
+                  <FormLabel>W (0)</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
@@ -158,12 +159,25 @@ export default function RickPanel() {
             />
             <FormField
               control={form.control}
+              name="u"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>u</FormLabel>
+                  <FormControl>
+                    <Input type="number" subfix="%" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="r_f"
               render={({ field }) => (
                 <FormItem className="">
                   <FormLabel>Risk free asset</FormLabel>
                   <FormControl>
-                    <Input type="number" {...field} />
+                    <Input type="number" subfix="%" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
