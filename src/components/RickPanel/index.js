@@ -97,7 +97,7 @@ export default function RickPanel() {
     <Card className="w-full flex flex-col h-full">
       <CardHeader>
         <CardTitle className="flex justify-between">Risk explore</CardTitle>
-        <CardDescription>List all stage of your life here.</CardDescription>
+        <CardDescription>If you wan to know about your risk in investment ^^.</CardDescription>
       </CardHeader>
       <CardContent className=" h-full relative flex-grow overflow-auto">
         <Form {...form}>
