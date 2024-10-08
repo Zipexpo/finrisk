@@ -99,11 +99,11 @@ export default function RickPanel() {
         <CardTitle className="flex justify-between">Risk explore</CardTitle>
         <CardDescription>List all stage of your life here.</CardDescription>
       </CardHeader>
-      <CardContent className="hidden md:block h-full relative flex-grow overflow-auto">
+      <CardContent className=" h-full relative flex-grow overflow-auto">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid gap-x-2 gap-y-1 grid-cols-4"
+            className="grid gap-x-2 gap-y-1 grid-cols-2 md:grid-cols-4"
           >
             <FormField
               control={form.control}
