@@ -61,8 +61,8 @@ export function ReportRisk({ title, subtitle, data }) {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="year"
-                tickLine={false}
-                axisLine={false}
+                // tickLine={false}
+                // axisLine={false}
                 type="number"
                 domain={["dataMin", "dataMax"]}
                 tickFormatter={(value) => value}
@@ -83,14 +83,14 @@ export function ReportRisk({ title, subtitle, data }) {
                 dataKey="W_F"
                 type="monotoneX"
                 stroke="var(--color-W_F)"
-                strokeWidth={1}
+                strokeWidth={1.5}
                 dot={false}
               />
               <Line
                 dataKey="randW"
                 type="monotoneX"
                 stroke="var(--color-randW)"
-                strokeWidth={1}
+                strokeWidth={1.5}
                 dot={false}
               />
               <Line
