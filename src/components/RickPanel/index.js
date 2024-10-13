@@ -137,7 +137,6 @@ export default function RickPanel() {
     const mu = formData.mu / 100;
     const sigma = formData.sigma / 100;
     vizdata.forEach((d, i) => {
-      debugger;
       d.randW = i
         ? d.W_F +
           fctGeoBrownMotion(
@@ -149,7 +148,6 @@ export default function RickPanel() {
           )
         : formData.init_amount;
     });
-    debugger;
     setVizdata([...vizdata]);
   };
   return (
