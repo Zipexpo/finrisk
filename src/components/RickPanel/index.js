@@ -43,27 +43,29 @@ export default function RickPanel() {
       const mu = formData.mu / 100;
       const sigma = formData.sigma / 100;
       const u = formData.u / 100;
-      const { start_year, t } = formData;
+      const r_f = formData.r_f / 100;
+      const a = formData.a / 100;
+      const { t } = formData;
       const sy = 0;
-      const ey = formData.end_year - formData.start_year;
-      const phi1 = jstat.normal.inv(1 / 100, 0, 1); // add control later
+      const ey = t;
+      const phi1 = jstat.normal.inv(a, 0, 1); // add control later
       const W_0 = init_amount;
+      const W_R = init_amount * u;
       const vizdata = [
         {
           W_F: W_0 * (1 - u),
-          E_WR: W_0,
-          Q_WR: W_0,
+          E_WR: W_R,
+          Q_WR: W_R,
           E: W_0,
           Q: W_0,
-          a: [W_0, W_0],
-          year: start_year,
+          year: 0,
           randW: W_0,
           pret: 0,
         },
       ];
-      for (let i = sy + 1; i <= ey; i++) {
+      for (let i = sy + 1; i <= 50; i++) {
         const pret = t * (i / 50); // why 50?
-        const W_F = 0; // 0 by now
+        const W_F = vizdata[0].W_F * Math.exp(r_f * pret); // 0 by now
         const E_WR = vizdata[0].E_WR * Math.exp(pret * mu);
         const Q_WR = fctGeoBrownMotion(vizdata[0].Q_WR, mu, sigma, pret, phi1);
         const E = E_WR + W_F;
@@ -86,7 +88,7 @@ export default function RickPanel() {
           Q,
           randW,
           pret,
-          year: start_year + i,
+          year: pret,
         });
       }
       console.log(vizdata);
@@ -97,46 +99,22 @@ export default function RickPanel() {
     <Card className="w-full flex flex-col h-full">
       <CardHeader>
         <CardTitle className="flex justify-between">Risk explore</CardTitle>
-        <CardDescription>If you wan to know about your risk in investment ^^.</CardDescription>
+        <CardDescription>
+          If you wan to know about your risk in investment ^^.
+        </CardDescription>
       </CardHeader>
-      <CardContent className=" h-full relative flex-grow overflow-auto">
+      <CardContent className="hidden md:block h-full relative flex-grow overflow-auto">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="grid gap-x-2 gap-y-1 grid-cols-2 md:grid-cols-4"
+            className="grid gap-x-2 gap-y-1 grid-cols-4"
           >
-            <FormField
-              control={form.control}
-              name="start_year"
-              render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel>Start Of Plan</FormLabel>
-                  <FormControl>
-                    <Input type="number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="end_year"
-              render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel>End Of Plan</FormLabel>
-                  <FormControl>
-                    <Input type="number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="init_amount"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>W (0)</FormLabel>
+                  <FormLabel>Initial wealth (W(0))</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
@@ -149,7 +127,7 @@ export default function RickPanel() {
               name="t"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>T</FormLabel>
+                  <FormLabel>Planing time in years (T)</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
@@ -162,7 +140,7 @@ export default function RickPanel() {
               name="u"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>u</FormLabel>
+                  <FormLabel>Percentage of Ricky Asset (u)</FormLabel>
                   <FormControl>
                     <Input type="number" subfix="%" {...field} />
                   </FormControl>
@@ -175,7 +153,7 @@ export default function RickPanel() {
               name="r_f"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Risk free asset</FormLabel>
+                  <FormLabel>Return of Risk-free asset (R_f)</FormLabel>
                   <FormControl>
                     <Input type="number" subfix="%" {...field} />
                   </FormControl>
@@ -188,7 +166,7 @@ export default function RickPanel() {
               name="mu"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Mu (μ)</FormLabel>
+                  <FormLabel>Expected return of Risky asset (μ)</FormLabel>
                   <FormControl>
                     <Input type="number" subfix="%" {...field} />
                   </FormControl>
@@ -201,7 +179,20 @@ export default function RickPanel() {
               name="sigma"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Sigma (σ)</FormLabel>
+                  <FormLabel>Risk of Risky asset (σ)</FormLabel>
+                  <FormControl>
+                    <Input type="number" subfix="%" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="a"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Confident</FormLabel>
                   <FormControl>
                     <Input type="number" subfix="%" {...field} />
                   </FormControl>
@@ -212,8 +203,13 @@ export default function RickPanel() {
             <Button type="submit">Submit</Button>
           </form>
         </Form>
-        <div className="h-[300px]">
-          <ReportRisk data={vizdata} />
+        <div className="flex">
+          <div className="w-2/3 h-[300px]">
+            <ReportRisk data={vizdata} />
+          </div>
+          <div className="w-1/3 h-[300px]">
+            <ReportRisk data={vizdata} />
+          </div>
         </div>
       </CardContent>
     </Card>

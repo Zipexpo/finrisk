@@ -31,11 +31,15 @@ const chartConfig = {
   },
   Q: {
     label: "Q[W]",
-    color: "purple",
+    color: "red",
   },
   randW: {
     label: "Random (W_T)",
     color: "gray",
+  },
+  W_F: {
+    label: "W_F",
+    color: "black",
   },
 };
 export function ReportRisk({ title, subtitle, data }) {
@@ -76,24 +80,31 @@ export function ReportRisk({ title, subtitle, data }) {
                 activeDot={false}
               /> */}
               <Line
+                dataKey="W_F"
+                type="monotoneX"
+                stroke="var(--color-W_F)"
+                strokeWidth={1}
+                dot={false}
+              />
+              <Line
                 dataKey="randW"
                 type="monotoneX"
                 stroke="var(--color-randW)"
-                strokeWidth={2}
+                strokeWidth={1}
                 dot={false}
               />
               <Line
                 dataKey="E"
                 type="monotoneX"
                 stroke="var(--color-E)"
-                strokeWidth={2}
+                strokeWidth={3}
                 dot={false}
               />
               <Line
                 dataKey="Q"
                 type="monotoneX"
                 stroke="var(--color-Q)"
-                strokeWidth={2}
+                strokeWidth={3}
                 dot={false}
               />
             </ComposedChart>
