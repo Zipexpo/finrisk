@@ -151,14 +151,16 @@ export default function RickPanel() {
     setVizdata([...vizdata]);
   };
   return (
-    <Card className="w-full flex flex-col h-full">
+    <Card className="w-full flex flex-col">
       <CardHeader>
-        <CardTitle className="flex justify-between">Risk explore</CardTitle>
+        <CardTitle className="flex justify-between">
+          Weath accumulation
+        </CardTitle>
         <CardDescription>
           If you want to know about your investment risks, fill the form below.
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-full relative flex-grow overflow-auto">
+      <CardContent className="relative flex-grow overflow-auto">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="">
             <div className="grid gap-x-2 gap-y-1 grid-cols-2 md:grid-cols-4">
@@ -245,7 +247,7 @@ export default function RickPanel() {
                 name="a"
                 render={({ field }) => (
                   <FormItem className="">
-                    <FormLabel>Confident</FormLabel>
+                    <FormLabel>Tolerance</FormLabel>
                     <FormControl>
                       <Input type="number" subfix="%" {...field} />
                     </FormControl>

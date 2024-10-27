@@ -1,4 +1,5 @@
 import Logo from "../icons/Logo";
+import { Badge } from "../ui/badge";
 
 export default function Header() {
   return (
@@ -7,9 +8,15 @@ export default function Header() {
         <Logo className="h-10 w-10" />
         <h3>Finrisk</h3>
       </div>
-      {/* <div className="self-end">
-        About us
-      </div> */}
+      <div className="self-end flex">
+        <div>
+          Ngan V.T. Nguyen <Badge variant="sucess">VNU-HCMUS</Badge>
+        </div>
+        ,
+        <div className="pl-2">
+          Dung Dinh Hai <Badge variant="sucess">VGU</Badge>
+        </div>
+      </div>
     </div>
   );
 }
