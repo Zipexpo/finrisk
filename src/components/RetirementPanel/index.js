@@ -171,7 +171,7 @@ export default function RetirementPanel() {
         </Form>
         {result && (
           <div className=" mt-5">
-            Required Saving Amount?
+            Required Saving Amount yearly:
             <p className="text-red-600 inline ml-3 font-bold">
               ${Math.round(result.saving)}
             </p>
