@@ -29,10 +29,10 @@ const chartConfig = {
     label: "Cash in Cash Account",
     color: "green",
   },
-  cb: {
-    label: "Cash in Cash Bank",
-    color: "black",
-  },
+  // cb: {
+  //   label: "Cash in Cash Bank",
+  //   color: "black",
+  // },
 };
 export function ReportRetirement({ title, subtitle, data }) {
   return (
@@ -78,13 +78,13 @@ export function ReportRetirement({ title, subtitle, data }) {
                 strokeWidth={1.5}
                 dot={false}
               />
-              <Line
+              {/* <Line
                 dataKey="cb"
                 type="monotoneX"
                 stroke="var(--color-cb)"
                 strokeWidth={1.5}
                 dot={false}
-              />
+              /> */}
             </ComposedChart>
           </ChartContainer>
         </ResponsiveContainer>

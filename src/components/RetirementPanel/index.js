@@ -63,10 +63,8 @@ export default function RetirementPanel() {
           year: tt,
         });
       }
-      debugger;
       let x =
         vizdata[tt].cc / (1 + i - f) / sumGeometricSeries(1 + i - f, w_t - 1);
-      console.log(x);
       for (let t_i = 0; t_i < w_t; t_i++) {
         const pre = vizdata[tt];
         tt++;
@@ -76,14 +74,13 @@ export default function RetirementPanel() {
           cc,
           cb,
           year: tt,
+          isSaving: true,
         });
       }
       vizdata.forEach((d) => (d.year = tt - d.year));
       setResult({ saving: x });
       // setHistdata(histdata);
-
-      setVizdata(vizdata);
-      console.log(vizdata);
+      setVizdata(vizdata.filter(d=>!d.isSaving));
     }
   }, [formData, form.formState.isValid]);
   return (

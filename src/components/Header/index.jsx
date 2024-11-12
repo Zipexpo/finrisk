@@ -9,12 +9,12 @@ export default function Header() {
         <h3>Finrisk</h3>
       </div>
       <div className="self-end flex">
-        <div>
-          Ngan V.T. Nguyen <Badge variant="sucess">VNU-HCMUS</Badge>
+        <div className="pl-2">
+          Dung Dinh Hai <Badge>VGU</Badge>
         </div>
         ,
         <div className="pl-2">
-          Dung Dinh Hai <Badge variant="sucess">VGU</Badge>
+          Ngan V.T. Nguyen <Badge>VNU-HCMUS</Badge><Badge variant="sucess">dev</Badge>
         </div>
       </div>
     </div>
