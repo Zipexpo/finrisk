@@ -14,7 +14,8 @@ export default function Header() {
         </div>
         ,
         <div className="pl-2">
-          Ngan V.T. Nguyen <Badge>VNU-HCMUS</Badge><Badge variant="sucess">dev</Badge>
+          Ngan V.T. Nguyen <Badge>VNU-HCMUS</Badge>
+          {/* <Badge variant="sucess">dev</Badge> */}
         </div>
       </div>
     </div>
